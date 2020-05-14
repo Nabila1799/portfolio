@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Homepage</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	* {
+	box-sizing: border-box;
+	}
+	
+	body {
+	font-family: Arial, Helvetica, sans-serif;
+	}
+
+	/* Style the header */
+	header {
+	background-color: #666;
+	padding: 30px;
+	text-align: center;
+	font-size: 50px;
+	color: white;
+	background-image: url("image/header2.jpg");  
+	}
+
+	/* Create two columns/boxes that floats next to each other */
+	nav {
+	float: left;
+	width: 15%;
+	height: 1000px; 
+	background:black;
+	padding: 2px;
+	}
+	
+	/* Style the list inside the menu */
+	nav ul {
+	list-style-type: none;
+	padding: 0;
+	}
+
+	article {
+	float: left;
+	padding: 20px;
+	width: 85%;
+	background-color: #f1f1f1;
+	background-image: url("image/galaxy4.jpg");
+	height: 1000px; 
+	}
+
+	/* Clear floats after the columns */
+	section:after {
+	content: "";
+	display: table;
+	clear: both;
+	}
+
+	/* Style the footer */
+	footer {
+	background-color: #777;
+	padding: 20px;
+	text-align: center;
+	color: white;
+	background-image: url("image/header2.jpg");
+	}
+
+	/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+	@media (max-width: 600px) {
+	nav, article {
+    width: 100%;
+    height: auto;
+	}
+	}
+</style>
+
+<style>
+	h1 {
+	font-size: 50px;
+	color: red;
+	text-style: "Franklin Gothic Medium";
+	}
+
+	h2 {
+	font-size: 35px;
+	}
+	
+	p {
+	font-size: 18px;
+	}
+</style>
+
+<style>
+	ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 200px;
+	background-color: #f1f1f1;
+	}
+
+	li a {
+	display: block;
+	color: #000;
+	padding: 8px 16px;
+	text-decoration: none;
+	}
+
+	li a.active {
+	background-color: #4CAF50;
+	color: white;
+	}
+
+	li a:hover:not(.active) {
+	background-color: #555;
+	color: white;
+	}
+</style>
+
+<style>
+	.cursive{
+	font-family:"Brush Script MT", Brush Script Std, cursive;
+	}
+</style>
+
+<style>
+	img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	}
+	
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+	.fa:hover {
+    opacity: 0.7;
+	}
+
+	.fa-facebook {
+	background: #3B5998;
+	color: white;
+	}
+</style>
+
+<style>
+	p {
+	text-align: center;
+	color:white;
+	}
+
+</style>
+
+</head>
+	<body>
+	<body onload="window.alert('Page successfully loaded');">  
+	<script>  
+
+	</script>  
+
+	<header>
+		<h1 style="color:white;"class="cursive">WELCOME TO MY PORTFOLIO</h1>
+	</header>
+
+<section>
+  <nav>
+   <ul class="navbar navbar-expend-lg navbar-light bg-light">	
+		<li><a href="homepage1.html">Home</a></li>
+		<li><a href="about_me.html">About Me</a></li>
+		<li><a href="favourite.html">Favourite</a></li>
+		<li><a href="skill.html">Skill</a></li>
+		<li><a href="feedback.html">Feedback</a></li>
+	</ul>
+	
+	<canvas id="canvas" width="200" height="200" style="background-color:black;">
+	</canvas>
+
+	<script>
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	var radius = canvas.height / 2;
+	ctx.translate(radius, radius);
+	radius = radius * 0.90
+	setInterval(drawClock, 1000);
+
+	function drawClock() {
+	drawFace(ctx, radius);
+	drawNumbers(ctx, radius);
+	drawTime(ctx, radius);
+	}
+
+	function drawFace(ctx, radius) {
+	var grad;
+	ctx.beginPath();
+	ctx.arc(0, 0, radius, 0, 2*Math.PI);
+	ctx.fillStyle = 'white';
+	ctx.fill();
+	grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+	grad.addColorStop(0, '#333');
+	grad.addColorStop(0.5, 'white');
+	grad.addColorStop(1, '#333');
+	ctx.strokeStyle = grad;
+	ctx.lineWidth = radius*0.1;
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+	ctx.fillStyle = '#333';
+	ctx.fill();
+	}
+
+	function drawNumbers(ctx, radius) {
+	var ang;
+	var num;
+	ctx.font = radius*0.15 + "px arial";
+	ctx.textBaseline="middle";
+	ctx.textAlign="center";
+	for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+	}
+	}
+
+	function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+	}
+
+	function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+	}
+	</script>
+   </nav>
+ 
+  <article>
+  
+  <p>(Touch at photo to make it clear)</p>
+	<img onmouseover="bigImg(this)" onmouseout="normalImg(this)" border="0" src="image/me.jpg" alt="Smiley" width="200" height="200">
+	<p>My name is Siti Hajar Nabila binti Mohd Suhaimi</p>
+	<p>I study at Universiti Teknologi MARA</p>
+	<p>My course is Bachelor of Computer Sciences(Hons.)</p>
+	<p>Be my friends at Facebook</p>
+    <p><a href="https://www.facebook.com/hajar.nabila.90" class="fa fa-facebook"></a></p>
+
+
+<script>
+function bigImg(x) {
+  x.style.height = "400px";
+  x.style.width = "400px";
+}
+
+function normalImg(x) {
+  x.style.height = "100px";
+  x.style.width = "100px";
+}
+</script>
+
+</body>  
+
+</html> 
+  
+ </article>
+  
+</section>
+
+<footer>
+<br><br>
+</footer>
+
+</body>
+</html>
